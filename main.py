@@ -63,7 +63,12 @@ class App:
         print("2 - Listar alunos")
         print("3 - Remover aluno")
         print("4 - Sair")
-        opcao = int(input("Digite a opção desejada: "))
+        try:
+            opcao = int(input("Digite a opção desejada: "))
+        except:
+            print("Digite apenas números!!!!")
+            input("Pressione enter tecla para continuar...")
+            return self.Welcome()
 
         self.__Menu(opcao)
 
