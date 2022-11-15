@@ -73,6 +73,7 @@ class App:
         self.__Menu(opcao)
 
     def __Menu(self, opcao):
+
         if opcao == 1:
             self.__clear()
             self.__cadastro_aluno()
@@ -102,10 +103,11 @@ class App:
             print("Saindo do sistema...")
             print("Obrigado por utilizar o sistema de cadastro de alunos 😁")
             print("Alunos participantes do projeto:")
-            print(". João Gabriel Pinho da Cruz")
-            print(". Gabriel Danny")
-            print(". Thaynara Damazio")
-            print(". Leonardo")
+            print(". João Gabriel Pinho da Cruz - 06003647")
+            print(". Gabriel Danny Machado Santos Aló de Oliveira Lopes - 06003936")
+            print(". Thaynara Damazio - 06003444")
+            print(". Leonardo - ")
+            print(". Alan - ")
             exit()
 
         else:
