@@ -21,4 +21,10 @@ class Connection:
 
     def select(self, sql):
         self.connection.execute(sql)
-        print(self.connection.fetchall())
+        rows = self.connection.fetchall()
+        return rows
+
+    def delete(self, sql):
+        self.connection.execute(sql)
+        self.banco.commit()
+        self.connection.close()
