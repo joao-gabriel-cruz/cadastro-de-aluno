@@ -33,6 +33,10 @@ class App:
     def __listar_alunos(self):
         result = Connection.Connection().select("SELECT * FROM alunos")
 
+        if len(result) == 0:
+            print("Não há alunos cadastrados")
+            return
+
         for row in result:
             print("=====================================")
             print("Nome: " + row[0])
