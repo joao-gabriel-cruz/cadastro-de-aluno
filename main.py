@@ -1,5 +1,6 @@
 import classes.Aluno as Aluno
 import database.connection as Connection
+import os
 
 
 class App:
@@ -8,7 +9,10 @@ class App:
         Connection.Connection().create_table()
         self.conexao = Connection.Connection()
 
-    def cadastro_aluno(self):
+    def __clear(self):
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+    def __cadastro_aluno(self):
 
         nome = input("Digite o nome do aluno: ")
         rua = input("Digite o nome da rua: ")
@@ -26,11 +30,26 @@ class App:
 
         Connection.Connection().insert(sql)
 
-        print("Aluno cadastrado com sucesso!")
+    def __listar_alunos(self):
+        result = Connection.Connection().select("SELECT * FROM alunos")
 
-    def listar_alunos(self):
+        for row in result:
+            print("Nome: " + row[0])
+            print("Rua: " + row[1])
+            print("Número: " + row[2])
+            print("Bairro: " + row[3])
+            print("Cidade: " + row[4])
+            print("UF: " + row[5])
+            print("Telefone: " + row[6])
+            print("Email: " + row[7])
+            print("Matrícula: " + row[8])
+            print("=====================================")
 
-        Connection.Connection().select("SELECT * FROM alunos")
+    def __remover_aluno(self):
+        print("Remover aluno")
+        matricula = input("Digite a matrícula do aluno: ")
+        sql = "DELETE FROM alunos WHERE matricula = '{}'".format(matricula)
+        Connection.Connection().delete(sql)
 
     def Welcome(self):
         print("Olá, seja bem vindo ao sistema de cadastro de alunos")
@@ -41,13 +60,47 @@ class App:
         print("4 - Sair")
         opcao = int(input("Digite a opção desejada: "))
 
+        self.__Menu(opcao)
+
+    def __Menu(self, opcao):
         if opcao == 1:
-            self.cadastro_aluno()
+            self.__clear()
+            self.__cadastro_aluno()
+            print("Aluno cadastrado com sucesso!")
+            input("Pressione enter tecla para continuar...")
+            self.__clear()
             return self.Welcome()
 
         elif opcao == 2:
+            self.__clear()
             print("Listar alunos")
-            self.listar_alunos()
+            self.__listar_alunos()
+            input("Pressione enter tecla para continuar...")
+            self.__clear()
+            return self.Welcome()
+
+        elif opcao == 3:
+            self.__clear()
+            self.__remover_aluno()
+            input("Pressione enter tecla para continuar...")
+            print("Aluno removido com sucesso!")
+            self.__clear()
+            return self.Welcome()
+
+        elif opcao == 4:
+            self.__clear()
+            print("Saindo do sistema...")
+            print("Obrigado por utilizar o sistema de cadastro de alunos 😁")
+            print("Alunos participantes do projeto:")
+            print(". João Gabriel Pinho da Cruz")
+            print(". Gabriel Danny")
+            print(". Thaynara Damazio")
+            print(". Leonardo")
+            exit()
+
+        else:
+            self.__clear()
+            print("Opção inválida, tente novamente!")
             return self.Welcome()
 
 
