@@ -34,6 +34,7 @@ class App:
         result = Connection.Connection().select("SELECT * FROM alunos")
 
         for row in result:
+            print("=====================================")
             print("Nome: " + row[0])
             print("Rua: " + row[1])
             print("Número: " + row[2])
