@@ -9,22 +9,35 @@ class Connection:
         self.connection = self.banco.cursor()
 
     def create_table(self):
-        self.connection.execute(
-            'CREATE TABLE IF NOT EXISTS alunos (nome TEXT, rua TEXT, numero TEXT, bairro TEXT, cidade TEXT, uf TEXT, telefone TEXT, email TEXT, matricula TEXT)'
-        )
-        self.connection.close()
+        try:
+            self.connection.execute(
+                'CREATE TABLE IF NOT EXISTS alunos (nome TEXT, rua TEXT, numero TEXT, bairro TEXT, cidade TEXT, uf TEXT, telefone TEXT, email TEXT, matricula TEXT)'
+            )
+            self.banco.close()
+        except:
+            print('Não foi possível criar a tabela')
 
     def insert(self, sql):
-        self.connection.execute(sql)
-        self.banco.commit()
-        self.connection.close()
+        try:
+            self.connection.execute(sql)
+            self.banco.commit()
+            self.connection.close()
+        except:
+            print("Não foi possível cadastrar o aluno")
 
     def select(self, sql):
-        self.connection.execute(sql)
-        rows = self.connection.fetchall()
-        return rows
+        try:
+            self.connection.execute(sql)
+            rows = self.connection.fetchall()
+            return rows
+        except:
+            print("Não foi possível listar os alunos")
 
     def delete(self, sql):
-        self.connection.execute(sql)
-        self.banco.commit()
-        self.connection.close()
+        try:
+            self.connection.execute(sql)
+
+            self.banco.commit()
+            self.connection.close()
+        except:
+            print("Não foi possível remover o aluno")
